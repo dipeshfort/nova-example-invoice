@@ -18,6 +18,19 @@ class InvoicesRepository {
         });
     }
 
+    async fetchByUser(userId) {
+        const query = {
+            name: 'fetch-invoice-by-user_id',
+            text: `SELECT * FROM ${this.table} WHERE user_id = $1`,
+            values: [userId]
+        };
+        const result = await this.executeQuery(query);
+        logger.trace(`Returned ${result.rows.length} invoices.`);
+        return result.rows.map((rowItem) => {
+            return this.toInvoice(rowItem)
+        });
+    }
+
     async fetchOne(invoiceId) {
         const query = {
             name: 'fetch-invoice-by-id',

@@ -6,7 +6,8 @@
   "scripts": {
     "dev": "nodemon ./bin/www | bunyan",
     "start": "node ./bin/www | bunyan",
-    "db:init": "node db/init.js"
+    "db:init": "node db/init.js",
+    "db:start": "docker run --rm --name invoices-db -d -p 5431:5432 -e POSTGRES_USER=nova-master -e POSTGRES_PASSWORD=nova-master -e POSTGRES_DB=invoices -v /Users/yadavdip/postgresqldata/invoices:/var/lib/postgresql/data postgres:9.6.11"
   },
   "dependencies": {
     "axios": "^0.18.0",
